@@ -42,7 +42,7 @@ foreach ($data as $baris)
     $i = 0;
     foreach ($baris as $cell)
     {
-        $pdf->Cell($header[$i]['length'], 10, $cell, 1, 0, $header[$i]['align'], $fill);
+        $pdf->Cell($kolom['length'], 10, $cell, 1, 0, $kolom['align'], $fill);
         $i++;
     }
     $fill = !$fill;
