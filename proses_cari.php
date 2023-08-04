@@ -1,7 +1,7 @@
 <?php
 
-    mysqli_connect("localhost", "root", "");
-    mysqli_select_db("akademik");
+    $connect = mysqli_connect("localhost", "root", "");
+    mysqli_select_db($connect, "akademik");
     $bagianWhere = "";
     if(isset($_POST['nimCat']))
     {
@@ -40,23 +40,23 @@
     
     if(isset($_POST['SEXCat']))
     {
-        $umur = $_POST['SEX'];
+        $SEX = $_POST['SEX'];
         if(empty($bagianWhere))
         {
-            $bagianWhere .= " AND SEX LIKE '%$rdosex%'";
+            $bagianWhere .= " AND SEX LIKE '%$SEX%'";
         }
         else
         {
-            $bagianWhere .= " AND SEX LIKE '%$rdosex%'";
+            $bagianWhere .= " AND SEX LIKE '%$SEX%'";
         }
     }
     
     
     $query = "SELECT * FROM mahasiswa WHERE " . $bagianWhere;
-    $hasil = mysqli_query($query);
+    $hasil = mysqli_query($connect, $query);
     echo "<table border='1'>";
     echo "<tr><td>NIM</td><td>Nama Mahasiswa</td><td>Umur</td><td>Jenis Kelamin</td></tr>";
-    while($data = mysqli_fetch_array($hasil))
+    while($data = mysqli_fetch_array($hasil, MYSQLI_ASSOC))
     {
         echo
         "<tr><td>NIM</td><td>" . $data['Nama'] . "</td><td>" . $data['Umur'] . "</td><td>" . $data['SEX'] . "</td></td>";
